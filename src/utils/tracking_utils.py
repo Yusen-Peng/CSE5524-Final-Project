@@ -29,3 +29,13 @@ def riemannian_distance(C1, C2):
     EPSILON = 1e-6
     log_eigs = np.log(eigenvalues + EPSILON)
     return np.sqrt(np.sum(log_eigs**2))
+
+def save_prediction(frame_index, best_y, best_x, window_height, window_width, output_path):
+    """
+        Save the predicted bounding box to the output file.
+    """
+    with open(output_path, "a") as f:
+        xtl, ytl = best_x, best_y
+        xbr, ybr = best_x + window_width, best_y + window_height
+        f.write(f"{frame_index},{xtl},{ytl},{xbr},{ybr}\n")
+

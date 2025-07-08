@@ -3,7 +3,7 @@ from skimage import io
 import matplotlib.pyplot as plt
 from tqdm import tqdm
 
-from utils.tracking_utils import extract_features, riemannian_distance
+from utils.tracking_utils import extract_features, riemannian_distance, save_prediction
 
 def build_match_distance_matrix(image: np.ndarray,
     modelCovMatrix: np.ndarray,
@@ -57,6 +57,7 @@ def visualize_match_distance_matrix(match_distance_matrix: np.ndarray, frame_ind
 
 def visualize_best_match(
         image: np.ndarray,
+        frame_index: int,
         best_y: int,
         best_x: int,
         window_height: int,
@@ -80,7 +81,7 @@ def visualize_best_match(
     plt.imshow(image_with_box.astype(np.uint8))
     plt.title("Best Match Bounding Box")
     plt.axis('off')
-    plt.savefig('P4_plots/best_match_bounding_box.png')
+    plt.savefig(f'figures/covariance_tracking/best_match_frame_{frame_index}.png')
     plt.close()
 
 
@@ -126,3 +127,5 @@ def covariance_tracking(
                             window_width=window_width)
     
     return best_y, best_x
+
+
