@@ -42,7 +42,7 @@ We are given a predicted bounding box and the ground-truth bounding box:
 Intersection over Union (IoU) is a common evaluation metric for object tracking: it is computed as follows:
 
 ```math
-\text{IoU} = \frac{\text{Area of Intersection}}{\text{Area of Union}}
+\text{IoU} = \frac{\text{Area}_{\text{union}}}{\text{Area}_{\text{intersection}}}
 ```
 
 In order to compute Area of Intersection, we will find the intersected box by computing the following 4 quantities first: 
@@ -70,5 +70,5 @@ we still need tocompute the area for each box:
 Eventually, we can compute Area of Union:
 
 ```math
-\text{Area}_{\text{union}} = \text{Area}_{\text{gt}} + \text{Area}_{\text{pred}} - \text{Area}_{\text{overlap}}
+\text{Area}_{\text{union}} = \text{Area}_{\text{gt}} + \text{Area}_{\text{pred}} - \text{Area}_{\text{intersection}}
 ```
