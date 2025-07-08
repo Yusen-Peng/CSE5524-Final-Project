@@ -55,15 +55,15 @@ x_{\text{left}} = \max(x_1^{\text{gt}},\ x_1^{\text{pred}})
 ```
 
 ```math
-y_{\text{top}} = \max(y_1^{\text{gt}},\ y_1^{\text{pred}}) \\
+y_{\text{top}} = \max(y_1^{\text{gt}},\ y_1^{\text{pred}})
 ```
 
 ```math
-x_{\text{right}} = \min(x_2^{\text{gt}},\ x_2^{\text{pred}}) \\ 
+x_{\text{right}} = \min(x_2^{\text{gt}},\ x_2^{\text{pred}}) 
 ```
 
 ```math
-y_{\text{bottom}} = \min(y_2^{\text{gt}},\ y_2^{\text{pred}}) \\
+y_{\text{bottom}} = \min(y_2^{\text{gt}},\ y_2^{\text{pred}})
 ```
 
 Then we can calculate Area of Intersection:
