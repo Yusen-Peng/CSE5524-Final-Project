@@ -197,7 +197,6 @@ def main():
     average_elapsed_time = run_tracking()
     print("Covariance tracking completed successfully.")
 
-
     # evaluate the tracking performance
     print("Evaluating tracking performance...")
     gt_path = "dataset/groundtruth.txt"

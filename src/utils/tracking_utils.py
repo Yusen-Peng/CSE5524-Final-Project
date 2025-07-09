@@ -107,3 +107,131 @@ def evaluate(gt_csv_path, prediction_csv_path):
 
     # average across all frames
     return sum(IoUs) / len(IoUs)
+
+
+def partial_evaluate(gt_csv_path, prediction_csv_path, max_frame=70):
+    """
+        Compute average IoU over the first `max_frame` frames only.
+    """
+    # Load ground truth boxes
+    gt_boxes = []
+    with open(gt_csv_path, "r") as f:
+        reader = csv.reader(f)
+        for row in reader:
+            x1, y1, x2, y2 = map(int, row)
+            gt_boxes.append((x1, y1, x2, y2))
+
+    # Load prediction boxes
+    pred_boxes = {}
+    with open(prediction_csv_path, "r") as f:
+        reader = csv.reader(f)
+        for row in reader:
+            frame, x1, y1, x2, y2 = map(int, row)
+            pred_boxes[frame] = (x1, y1, x2, y2)
+
+    # Compute IoU metrics for first `max_frame` frames
+    IoUs = []
+    for frame_idx, gt_box in enumerate(gt_boxes):
+        if frame_idx >= max_frame:
+            break
+        if frame_idx not in pred_boxes:
+            print(f"Warning: Missing prediction for frame {frame_idx}")
+            continue
+        pred_box = pred_boxes[frame_idx]
+        IoUs.append(intersectionOverUnion(gt_box, pred_box))
+
+    return sum(IoUs) / len(IoUs)
+
+def circularNeighbors(
+        img: np.ndarray, 
+        x: float, 
+        y: float, 
+        radius: float
+    ) -> np.ndarray:
+    """
+        extract a feature vector for each pixel in a circular neighborhood
+    """
+    height, width, _ = img.shape
+
+    # find the bounding box
+    x_range = np.arange(int(np.floor(x - radius)), int(np.ceil(x + radius))+1)
+    y_range = np.arange(int(np.floor(y - radius)), int(np.ceil(y + radius))+1)
+
+    # find all the neighbors
+    X = []
+    for xi in x_range:
+        for yi in y_range:
+            distance = np.sqrt((xi - x) ** 2 + (yi - y) ** 2)
+
+            # check the distance: STRICTLY less than radius
+            if distance < radius and 0 <= xi < width and 0 <= yi < height:
+                # extract features
+                R, G, B = img[yi, xi]
+                X.append([xi, yi, R, G, B])
+
+    return np.array(X)
+
+def EpanechnikovKernel(xi, yi, x, y, h):
+    """
+        Epanechnikov kernel function.
+    """
+    r = ((xi - x) ** 2 + (yi - y) ** 2) / (h ** 2)
+    if r < 1:
+        return 1 - r
+    else:
+        return 0
+    
+def color2bin(R, G, B, bins):
+    """
+        convert RGB values to bin indices    
+    """
+    r_bin = int(R * bins / 256)
+    g_bin = int(G * bins / 256)
+    b_bin = int(B * bins / 256)
+
+    # ensure indices are within bounds
+    r_bin = min(max(r_bin, 0), bins - 1)
+    g_bin = min(max(g_bin, 0), bins - 1)
+    b_bin = min(max(b_bin, 0), bins - 1)
+
+    return r_bin, g_bin, b_bin
+
+def colorHistogram(X, bins, x, y, h):
+    """
+        build a color histogram from a neighborhood of points.
+    """
+    hist = np.zeros((bins, bins, bins), dtype=np.float32)
+
+    for xi, yi, R, G, B in X:
+        # apply the Epanechnikov kernel
+        k = EpanechnikovKernel(xi, yi, x, y, h)
+
+        # only accumulate if computed kernel is positive
+        if k > 0:
+            # convert RGB values to bin indices
+            r_bin, g_bin, b_bin = color2bin(R, G, B, bins)
+
+            # accumulate the histogram
+            hist[r_bin, g_bin, b_bin] += k
+    
+    # normalize the histogram
+    hist /= (np.sum(hist) + 1e-8)
+    return hist
+
+def meanshiftWeights(X, q_model, p_test, bins):
+    """
+        calculate a vector of the mean-shift weights - sqrt(q/p)
+    """
+    weights = np.zeros(X.shape[0], dtype=np.float32)
+
+    for i, (_, _, R, G, B) in enumerate(X):
+        # convert RGB values to bin indices
+        r_bin, g_bin, b_bin = color2bin(R, G, B, bins)
+
+        q = q_model[r_bin, g_bin, b_bin]
+        p = p_test[r_bin, g_bin, b_bin]
+
+        # calculate the weight
+        weights[i] = np.sqrt( q / (p + 1e-8) )
+    
+    return weights

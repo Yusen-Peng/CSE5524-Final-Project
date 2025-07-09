@@ -1,8 +1,8 @@
 # No initial Bounding Box is Needed: A Feature Extraction Driven Approach for Object Tracking 
 
-## CSE5524 Final Project - Yuhan Duan, Cen Gu, Yusen Peng
+## Motivation
 
-Many existing object tracking methods require initital bounding boxes for object tracking. In our work, we propose an approach that automatically detects interest points using interest point detectors on the first frame image, performs segmentation techniques upon these detected interest points, and finally generate our own bounding boxes without relying on provided ones. Eventually, we perform multiple tracking techniques to track objects in the dataset.
+Many existing object tracking methods require initital bounding boxes for object tracking. In our work, we propose an approach that automatically detects interest points using interest point detectors on the first frame image, performs segmentation techniques upon these detected interest points, and finally generate our own bounding boxes without relying on provided ones. Eventually, we perform multiple tracking techniques to track objects in the dataset. We provide detailed benchmark study and intuitive video demos as well.
 
 ## Environment Setup
 
@@ -117,14 +117,16 @@ Where **N** represents the total number of frames in the video sequence.
 
 ### Benchmark Results
 
-| Tracking Method | IoU | Time |
-| --------------- | --- | ---- |
-| Covariance, baseline | **running now** | **running now** |
-| Mean-shift, baseline | **TBD** | **TBD** |
-| KLT, baseline | **TBD** | **TBD** |
-| Covariance, ours | **TBD** | **TBD** |
-| Mean-shift, ours | **TBD** | **TBD** |
-| KLT, ours | **TBD** | **TBD** |
+We compute average IoU for the first 20 frames, first 70 frames, and IoU for all 597 frames respectively: In the first 20 frames, the background barely changes; in the first 70 changes, the background does change but is still relatively easy; after the first 70 frames, more complex background gets introduced. We compute both IoU metrics to study how **sensitive** each tracking algorithm is to varying/challenging backgrounds. The average elapsed time is measured across all 597 frames, though.
+
+| Tracking Method | IoU (first 20 frames) | IoU (first 70 frames) | IoU (all 597 frames) | Time | 
+| --------------- | --- | ---- | ---- | ---- |
+| Covariance, baseline | **running now** | **running now** | **running now** | **running now** |
+| Mean-shift, baseline | **running now** | **running now** | **running now** | **running now** |
+| KLT, baseline | **TBD** | **TBD** | **TBD** | **TBD** |
+| Covariance, ours | **TBD** | **TBD** | **TBD** | **TBD** |
+| Mean-shift, ours | **TBD** | **TBD** | **TBD** | **TBD** |
+| KLT, ours | **TBD** | **TBD** | **TBD** | **TBD** |
 
 ### Video Demo
 
