@@ -26,3 +26,4 @@ def visualize_ground_truth(frame_index: int, image_dir: str, gt_path: str):
     ax.axis('off')
     plt.savefig(f"figures/ground_truth/ground_truth_frame_{frame_index}.png")
     plt.close(fig)
+

@@ -35,12 +35,6 @@ We explore three basic object tracking algorithms:
 - [ ] mean shift tracking
 - [ ] KLT tracking
 
-## Video Demo
-
-TBD
-
-## Benchmark Study
-
 ### Efficiency Metric: Elapsed Time
 
 We simply measure the elapsed time it takes to track a single frame on average, namely:
@@ -131,3 +125,27 @@ Where **N** represents the total number of frames in the video sequence.
 | Covariance, ours | **TBD** | **TBD** |
 | Mean-shift, ours | **TBD** | **TBD** |
 | KLT, ours | **TBD** | **TBD** |
+
+### Video Demo
+
+In addition to benchmark study, we also compile a list of video demos to visualize our tracking results:
+
+| method | video link |
+| ------ | ---------- | 
+| ground truth | [ground truth](figures/video_demo/ground_truth.mp4)|
+| Covariance, baseline | **TBD** |
+| Mean-shift, baseline | **TBD** |
+| KLT, baseline | **TBD** |
+| Covariance, ours | **TBD** |
+| Mean-shift, ours | **TBD** |
+| KLT, ours | **TBD** |
+
+## Contact
+
+If you have any questions or suggestions, feel free to contact:
+
+- Yuhan Duan (duan.418@osu.edu)
+- Cen Gu (gu.1027@osu.edu)
+- Yusen Peng (peng.1007@osu.edu)
+
+Or describe it in Issues.
