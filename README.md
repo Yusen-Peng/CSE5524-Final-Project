@@ -119,10 +119,10 @@ Where **N** represents the total number of frames in the video sequence.
 
 We compute average IoU for the first 20 frames, first 70 frames, and IoU for all 597 frames respectively: In the first 20 frames, the background barely changes; in the first 70 changes, the background does change but is still relatively easy; after the first 70 frames, more complex background gets introduced. We compute both IoU metrics to study how **sensitive** each tracking algorithm is to varying/challenging backgrounds. The average elapsed time is measured across all 597 frames, though.
 
-| Tracking Method | IoU (first 20 frames) | IoU (first 70 frames) | IoU (all 597 frames) | Time | 
+| Tracking Method | IoU (first 20 frames) | IoU (first 70 frames) | IoU (all 597 frames) | Time (seconds) | 
 | --------------- | --- | ---- | ---- | ---- |
-| Covariance, baseline | **running now** | **running now** | **running now** | **running now** |
-| Mean-shift, baseline | **running now** | **running now** | **running now** | **running now** |
+| Covariance, baseline | **85.25%** | **44.44%** | **7.63%** | **26.9414** |
+| Mean-shift, baseline | **11.19%** | **11.98%** | **1.56%** | **0.9094** |
 | KLT, baseline | **TBD** | **TBD** | **TBD** | **TBD** |
 | Covariance, ours | **TBD** | **TBD** | **TBD** | **TBD** |
 | Mean-shift, ours | **TBD** | **TBD** | **TBD** | **TBD** |
@@ -135,8 +135,8 @@ In addition to benchmark study, we also compile a list of video demos to visuali
 | method | video link |
 | ------ | ---------- | 
 | ground truth | [ground truth](figures/video_demo/ground_truth.mp4)|
-| Covariance, baseline | **TBD** |
-| Mean-shift, baseline | **TBD** |
+| Covariance, baseline | [covariance baseline](figures/video_demo/covariance_baseline.mp4) |
+| Mean-shift, baseline | [mean-shift baseline](figures/video_demo/meanshift_baseline.mp4) |
 | KLT, baseline | **TBD** |
 | Covariance, ours | **TBD** |
 | Mean-shift, ours | **TBD** |

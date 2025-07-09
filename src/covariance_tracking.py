@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 from tqdm import tqdm
 import os
 import time
-from utils.tracking_utils import extract_features, riemannian_distance, save_prediction, parse_args, evaluate
+from utils.tracking_utils import extract_features, partial_evaluate, riemannian_distance, save_prediction, parse_args, evaluate
 
 class CovarianceTracking:
     """
@@ -195,16 +195,20 @@ def main():
     # run the covariance tracking
     print("Starting covariance tracking...")
     average_elapsed_time = run_tracking()
+    #average_elapsed_time = 0
     print("Covariance tracking completed successfully.")
 
     # evaluate the tracking performance
     print("Evaluating tracking performance...")
     gt_path = "dataset/groundtruth.txt"
-    prediction_path = "results/own_predictions.txt"
-    average_iou = evaluate(gt_csv_path=gt_path, prediction_csv_path=prediction_path)
-    print(f"Average IoU: {average_iou:.4f}")
-    print(f"Average Elapsed Time per Frame: {average_elapsed_time:.5f} seconds")
-
+    prediction_path = "results/covariance_baseline_predictions.txt"
+    avg_iou_20 = partial_evaluate(gt_csv_path=gt_path, prediction_csv_path=prediction_path, max_frame=20)
+    avg_iou_70 = partial_evaluate(gt_csv_path=gt_path, prediction_csv_path=prediction_path, max_frame=70)
+    avg_iou = evaluate(gt_csv_path=gt_path, prediction_csv_path=prediction_path)
+    print(f"Average IoU (first 20 frames): {avg_iou_20:.4f}")
+    print(f"Average IoU (first 70 frames): {avg_iou_70:.4f}")
+    print(f"Average IoU: {avg_iou:.4f}")
+    print(f"Average Time per Frame: {average_elapsed_time:.5f} seconds")
 
 if __name__ == "__main__":
     main()
