@@ -6,7 +6,14 @@ Many existing object tracking methods require initital bounding boxes for object
 
 ## Environment Setup
 
-TBD
+We recommend settting up environment using Conda environment and our `environment.yml` file:
+
+```bash
+conda env create -f environment.yml
+conda activate cse_5524
+```
+
+This will install all required dependencies and activate the cse_5524 environment.
 
 ## Dataset
 
