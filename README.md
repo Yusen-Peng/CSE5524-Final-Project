@@ -134,9 +134,9 @@ In addition to benchmark study, we also compile a list of video demos to visuali
 
 | method | video link |
 | ------ | ---------- | 
-| ground truth | [ground truth](figures/video_demo/ground_truth.mp4)|
-| Covariance, baseline | [covariance baseline](figures/video_demo/covariance_baseline.mp4) |
-| Mean-shift, baseline | [mean-shift baseline](figures/video_demo/meanshift_baseline.mp4) |
+| ground truth | [ground truth](https://drive.google.com/file/d/1W3BlWlrwHVO1nAA1k9IQ2g8IIRIVmAi2/view?usp=share_link)|
+| Covariance, baseline | [covariance baseline](https://drive.google.com/file/d/1I_uAREUHV7edMg8VCvzBNkN4WUxLBctB/view?usp=share_link) |
+| Mean-shift, baseline | [mean-shift baseline](https://drive.google.com/file/d/1ART2qJpDhWmDruF6XJ2w6M5sb2QyVWoQ/view?usp=share_link) |
 | KLT, baseline | **TBD** |
 | Covariance, ours | **TBD** |
 | Mean-shift, ours | **TBD** |
