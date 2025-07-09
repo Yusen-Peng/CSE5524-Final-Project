@@ -122,7 +122,7 @@ We compute average IoU for the first 20 frames, first 70 frames, and IoU for all
 | Tracking Method | IoU (first 20 frames) | IoU (first 70 frames) | IoU (all 597 frames) | Time (seconds) | 
 | --------------- | --- | ---- | ---- | ---- |
 | Covariance, baseline | **85.25%** | **44.44%** | **7.63%** | **26.9414** |
-| Mean-shift, baseline | **11.19%** | **11.98%** | **1.56%** | **0.9094** |
+| Mean-shift, baseline | **13.59%** | **14.45%** | **10.28%** | **0.0869** |
 | KLT, baseline | **TBD** | **TBD** | **TBD** | **TBD** |
 | Covariance, ours | **TBD** | **TBD** | **TBD** | **TBD** |
 | Mean-shift, ours | **TBD** | **TBD** | **TBD** | **TBD** |

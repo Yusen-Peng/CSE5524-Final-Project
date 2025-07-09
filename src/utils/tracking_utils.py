@@ -2,6 +2,9 @@ import numpy as np
 from scipy.linalg import eigvals
 import argparse
 import csv
+from skimage import io, filters
+import os
+from skimage import transform
 
 def extract_features(window: np.ndarray) -> np.ndarray:
     """
@@ -235,3 +238,38 @@ def meanshiftWeights(X, q_model, p_test, bins):
         weights[i] = np.sqrt( q / (p + 1e-8) )
     
     return weights
+
+def compute_gradients(image) -> tuple[np.ndarray, np.ndarray]:
+        Ix = filters.sobel_v(image)
+        Iy = filters.sobel_h(image)
+        return Ix, Iy
+
+
+def build_image_pyramid(image, pyramid_levels):
+    pyramid = [image]
+    for _ in range(1, pyramid_levels):
+        # generate each pyramid
+        image = transform.rescale(image, 0.5, anti_aliasing=True)
+        pyramid.append(image)
+    
+    # the order is from coarse to fine
+    return pyramid[::-1]
+
+def bbox_to_corners(bbox):
+    x1, y1, x2, y2 = bbox
+    return np.array([
+        [x1, y1],
+        [x2, y1],
+        [x1, y2],
+        [x2, y2]
+    ])
+
+def corners_to_bbox(corners):
+    x_coords = corners[:, 0]
+    y_coords = corners[:, 1]
+    return [
+        int(np.round(x_coords.min())),
+        int(np.round(y_coords.min())),
+        int(np.round(x_coords.max())),
+        int(np.round(y_coords.max()))
+    ]

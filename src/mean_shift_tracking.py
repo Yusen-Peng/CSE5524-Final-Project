@@ -19,6 +19,7 @@ class MeanShiftTracking:
     def __init__(self, frames_dir: str, bounding_box_path: str, bins: int = 16, h: int = 25):
         self.bins = bins
         self.h = h
+        self.threshold = 1  # convergence threshold
 
         with open(bounding_box_path, "r") as f:
             self.box_lines = f.readlines()
@@ -42,11 +43,11 @@ class MeanShiftTracking:
         X_model = circularNeighbors(first_frame, x0, y0, h)
         self.q_model = colorHistogram(X_model, bins, x0, y0, h)
 
-    def mean_shift_step(self, image: np.ndarray, num_iterations: int = 25) -> tuple:
+    def mean_shift_step(self, image: np.ndarray, max_num_iterations: int = 300) -> tuple:
         """
             perform the mean shift step for the given image.
         """
-        for _ in range(num_iterations):
+        for _ in range(max_num_iterations):
             X_target = circularNeighbors(image, self.current_x, self.current_y, self.h)
             p_test = colorHistogram(X_target, self.bins, self.current_x, self.current_y, self.h)
             weights = meanshiftWeights(X_target, self.q_model, p_test, self.bins)
@@ -55,6 +56,10 @@ class MeanShiftTracking:
             next_y = np.sum(X_target[:, 1] * weights) / (np.sum(weights) + 1e-8)
 
             self.current_x, self.current_y = next_x, next_y
+
+            # check convergence
+            if np.abs(next_x - self.current_x) < self.threshold and np.abs(next_y - self.current_y) < self.threshold:
+                break
 
         return self.current_y, self.current_x
 
@@ -105,7 +110,7 @@ def run_meanshift_tracking():
         frame_path = os.path.join(frames_dir, f"img1{frame_index:03d}.jpg")
         image = io.imread(frame_path).astype(np.float32)
 
-        best_y, best_x = tracker.mean_shift_step(image=image, num_iterations=50)
+        best_y, best_x = tracker.mean_shift_step(image=image, max_num_iterations=300)
         tracker.visualize_prediction(image, frame_index)
         save_prediction(frame_index, int(best_y), int(best_x),
                         tracker.window_height, tracker.window_width,
