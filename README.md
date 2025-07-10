@@ -1,7 +1,5 @@
 # No initial Bounding Box is Needed: A Feature Extraction Driven Approach for Object Tracking 
 
-## Motivation
-
 Many existing object tracking methods require initital bounding boxes for object tracking. In our work, we propose an approach that automatically detects interest points using interest point detectors on the first frame image, performs segmentation techniques upon these detected interest points, and finally generate our own bounding boxes without relying on provided ones. Eventually, we perform multiple tracking techniques to track objects in the dataset. We provide detailed benchmark study and intuitive video demos as well.
 
 ## Environment Setup
@@ -121,12 +119,12 @@ We compute average IoU for the first 20 frames, first 70 frames, and IoU for all
 
 | Tracking Method | IoU (first 20 frames) | IoU (first 70 frames) | IoU (all 597 frames) | Time (seconds) | 
 | --------------- | --- | ---- | ---- | ---- |
-| Covariance, baseline | **85.25%** | **44.44%** | **7.63%** | **26.9414** |
-| Mean-shift, baseline | **13.59%** | **14.45%** | **10.28%** | **0.0869** |
-| KLT, baseline | **TBD** | **TBD** | **TBD** | **TBD** |
-| Covariance, ours | **TBD** | **TBD** | **TBD** | **TBD** |
-| Mean-shift, ours | **TBD** | **TBD** | **TBD** | **TBD** |
-| KLT, ours | **TBD** | **TBD** | **TBD** | **TBD** |
+| Covariance, baseline | **85.25%** | 44.44% | 7.63% | 26.9414 |
+| Mean-shift, baseline | 13.59% | 14.45% | **10.28%** | 0.0869 |
+| KLT, baseline | 48.04% | **48.77%** | 8.44% | **0.0798** |
+| Covariance, ours | TBD | TBD | TBD | TBD |
+| Mean-shift, ours | TBD | TBD | TBD | TBD |
+| KLT, ours | TBD | TBD | TBD | TBD |
 
 ### Video Demo
 
@@ -137,7 +135,7 @@ In addition to benchmark study, we also compile a list of video demos to visuali
 | ground truth | [ground truth](https://drive.google.com/file/d/1W3BlWlrwHVO1nAA1k9IQ2g8IIRIVmAi2/view?usp=share_link)|
 | Covariance, baseline | [covariance baseline](https://drive.google.com/file/d/1I_uAREUHV7edMg8VCvzBNkN4WUxLBctB/view?usp=share_link) |
 | Mean-shift, baseline | [mean-shift baseline](https://drive.google.com/file/d/1ART2qJpDhWmDruF6XJ2w6M5sb2QyVWoQ/view?usp=share_link) |
-| KLT, baseline | **TBD** |
+| KLT, baseline | [KLT baseline](https://drive.google.com/file/d/1sRKaWyJh0SKxvY1SQ9MMsWCeIRlf37yb/view?usp=share_link) |
 | Covariance, ours | **TBD** |
 | Mean-shift, ours | **TBD** |
 | KLT, ours | **TBD** |

@@ -34,8 +34,9 @@ def demo_maker(image_folder: str, output_path: str, fps: int, descriptor: str):
 if __name__ == "__main__":
     #image_folder = 'dataset/frames_with_boxes'
     #image_folder = 'figures/covariance_tracking/'
-    image_folder = 'figures/meanshift_tracking'
+    #image_folder = 'figures/meanshift_tracking'
+    image_folder = 'figures/KLT_tracking'
     output_path = 'figures/video_demo'
     fps = 30
-    descriptor = 'meanshift_baseline' # 'covariance_baseline', 'meanshift_baseline' or 'ground_truth'
+    descriptor = 'klt_baseline' # 'covariance_baseline', 'meanshift_baseline', 'klt_baseline', 'ground_truth'
     demo_maker(image_folder, output_path, fps, descriptor)
