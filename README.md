@@ -30,8 +30,8 @@ TBD
 We explore three basic object tracking algorithms:
 
 - [x] covariance tracking
-- [ ] mean shift tracking
-- [ ] KLT tracking
+- [x] mean shift tracking
+- [x] KLT tracking
 
 ### Efficiency Metric: Elapsed Time
 
@@ -49,7 +49,7 @@ Where **N** represents the total number of frames in the video sequence.
 
 Image credit: [PyImageSearch](https://pyimagesearch.com/2016/11/07/intersection-over-union-iou-for-object-detection/)
 
-We are given a predicted bounding box and the ground-truth bounding box:
+<!-- We are given a predicted bounding box and the ground-truth bounding box:
 
 ```math
 \text{predicted bounding box}: (x_1^{\text{pred}},\ y_1^{\text{pred}},\ x_2^{\text{pred}},\ y_2^{\text{pred}})
@@ -111,7 +111,7 @@ Eventually, we compute the average Intersection over Union (IoU) within a single
 \text{Average Intersection over Union per Frame} = \frac{1}{N} \sum_{i=1}^{N} \text{IoU}_i
 ```
 
-Where **N** represents the total number of frames in the video sequence.
+Where **N** represents the total number of frames in the video sequence. -->
 
 ### Benchmark Results
 
